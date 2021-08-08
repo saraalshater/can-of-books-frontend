@@ -5,3 +5,8 @@ a{
 a:hover{
   color:darkgrey;
 }
+
+
+.link{
+  margin-left: 20px;
+}
