@@ -53,6 +53,14 @@ class MyFavoriteBooks extends React.Component {
     this.getBooks();
   }
 
+
+
+  componentDidUpdate(prevProps) {
+    if (this.props.booksData != prevProps.bookData) {
+      this.getBooks();
+    }
+  }
+
   render() {
 
     const { isAuthenticated } = this.props.auth0;
@@ -77,23 +85,29 @@ class MyFavoriteBooks extends React.Component {
       
          ) }
           <Carousel>
-          {this.state.book &&
-            this.state.book.map((item) => {
-              return (
-                <Carousel.Item interval={1000}>
-                  <img
-                    className="d-block w-100"
-                    src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_813319932_383768.jpg"
-                    alt="First slide"
-                  />
-                  <Carousel.Caption>
-                    <h3>{item.title}</h3>
-                    <p>{item.description}</p>
-                  </Carousel.Caption>
-                </Carousel.Item>
-              );
-            })}
-        </Carousel>
+            {this.state.book &&
+              this.state.book.map((item,idx) => {
+                return (
+                  
+                  <Carousel.Item interval={1000} key={idx}>
+      
+                    <img
+                    
+                      className="d-block w-100"
+                      src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_813319932_383768.jpg"
+                      alt="First slide"
+                    />
+                    <Carousel.Caption>
+                      <h3>{item.title}</h3>
+                      
+                      <p>{item.description}</p>
+                  <button onClick={()=> this.props.deleteBook(idx)}>X</button>
+                    </Carousel.Caption>
+                  </Carousel.Item>
+                );
+              })}
+              
+          </Carousel>
 
       </>
     )
